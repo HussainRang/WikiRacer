@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    
+    <body>
+
+        <!-- Header -->
+        <div>
+            <p class="Header"> Wiki Racer </p>
+        </div>
+
+        <!-- Enter the start link and the end link -->
+        <div class="input_parent_div">
+            <form> 
+                
+                <div class="input_div">
+                    <input type="text" class="input" placeholder="Start Link" id="StartLink">
+                </div>
+
+                <div class="input_div">
+                    <input type="text" class="input" placeholder="End Link" id="EndLink">
+                </div>
+
+                <div class="button_div">
+                    <input type="button" onclick="send_request()"  value="START" class="btn"/>
+                </div>
+
+            </form>
+        </div>
+
+
+        <!-- Output div -->
+        <div class="output_div">
+
+        </div>
+
+        
+    </body>
+
+    <script src="index.js" async defer></script>
+
+</html>

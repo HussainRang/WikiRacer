@@ -1,0 +1,113 @@
+body
+{
+    background-color : #0E185F;
+    margin:0px;
+    padding:0px;
+}
+
+
+.Header
+{
+    background-color: #2FA4FF;
+    text-align: center;
+    font-size: 50px;
+    margin:20%;   
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 2%;
+    color: #E8FFC2;
+}
+
+p{
+    color: #0E185F;
+}
+
+.input_parent_div
+{
+    margin: 10px;
+    text-align: center;
+    font-weight: bold;
+    align-items: center;
+}
+
+.input_div
+{
+    margin-top: 30px;
+    color: brown;
+    font-size: 25px;
+}
+
+.input::placeholder{
+    text-align: center;
+    color: navy;
+}
+
+.input
+{
+    height:30px;
+    border-radius: 30cm;
+    width:900px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.input[type = text]{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.input:focus{
+    border: 4px solid orange;
+}
+.output_div
+{
+    background-color:#0E185F ;
+    height: fit-content;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 40px;
+    border-radius: 40px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.button_div
+{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn
+{
+    width:9% ;
+    height:25px ;
+    border: 2px solid black;
+    box-shadow: 1px 1px #48525d; 
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    color:white;
+    background-color:firebrick;
+}
+
+.btn:hover:not([disabled])
+{
+    width:10% ;
+    height:27px ;
+    margin-top:5px;
+    box-shadow: 1px 1px #48525d; 
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    color:black;
+    background-color:greenyellow;
+}
+
+.btn:disabled
+{
+    width:9% ;
+    height:25px ;
+    border: 2px solid black;
+    box-shadow: 1px 1px #48525d; 
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    color:white;
+    background-color:#48525d;
+}
