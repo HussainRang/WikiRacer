@@ -1,4 +1,4 @@
-const {a_star} = require('./a_star.js')
+const {bfs} = require('./a_star.js')
 
 const get_ladder = async (req,res,next)=>{
 
@@ -6,7 +6,7 @@ const get_ladder = async (req,res,next)=>{
     {    
         let start_time = new Date();
         
-        const answer = await a_star( req.body.start_link , req.body.end_link );
+        const answer = await bfs( req.body.start_link , req.body.end_link );
         
         let end_time = new Date();
         
