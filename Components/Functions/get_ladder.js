@@ -2,6 +2,8 @@ const {bfs} = require('./a_star.js')
 
 const get_ladder = async (req,res,next)=>{
 
+    //console.log(req.body);
+    
     try 
     {    
         let start_time = new Date();

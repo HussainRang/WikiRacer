@@ -48,12 +48,10 @@ p{
     border-radius: 30cm;
     width:900px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-.input[type = text]{
     padding-left: 20px;
     padding-right: 20px;
 }
+
 .input:focus{
     border: 4px solid orange;
 }

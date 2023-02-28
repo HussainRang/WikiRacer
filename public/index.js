@@ -1,5 +1,8 @@
 const send_request = async ()=>{
-
+    
+    const backoff = 2;
+    let attempts = 0;
+    let response;
     try {
         event.preventDefault();
     
@@ -11,25 +14,54 @@ const send_request = async ()=>{
     
         const start_link = document.getElementById('StartLink').value;
         const end_link = document.getElementById('EndLink').value;
-       
+        let max_retryRequest = document.getElementById('Retry_number').value;
+        
+        if(!max_retryRequest) max_retryRequest=1;
+        else max_retryRequest = parseInt(max_retryRequest);
+        console.log( typeof max_retryRequest , max_retryRequest );
+
+
         if(check_link(start_link) && check_link(end_link) && start_link!=end_link)
-        {
+        {   
             let btn = document.getElementsByClassName('btn');
             console.log(btn[0]);
             btn[0].disabled =true;
-    
-            let response = await axios.post('http://localhost:2000/api/ladder', {
-                "start_link": start_link,
-                "end_link": end_link
-              })
-    
-            console.log(response.data.message);
+
+            for(let i=0;i<max_retryRequest;i+=1)
+            {
+                response = await axios(
+                    {
+                        method: 'post',
+                        url: 'http://localhost:2001/api/ladder',
+                        validateStatus: (status) => {  return ( (status>=200 && status<300) || (status>=500 && status<600 ) ) } ,
+                        data: 
+                        {
+                            "start_link": start_link,
+                            "end_link": end_link
+                        }
+                    });
+
+                console.log("RESPONSE: ",response);
+            
+                if(response.status>=200 && response.status<300) break;
+                else
+                {
+                    if(i===max_retryRequest-1) print_error(`Operation Failed !! Attempted ${max_retryRequest} times .`);
+                    else
+                    {
+                        attempts+=1;
+                        let delay = Math.pow(backoff,attempts)
+                        await timeout(delay);
+                    }
+                }
+            }
+            
+            console.log("MESSAGE: ",response.data.message);
             if(response.data.error==="No")
             {
                 console.log(response.data.Time);
                 print_output(response.data.message , response.data.Time);
             }
-
             btn[0].disabled =false;
         }
         else print_error("Start Link and End Link should be different  !!!")
@@ -97,4 +129,10 @@ const print_error = (error)=>{
     let btn = document.getElementsByClassName('btn');
     btn[0].disabled =false;
 
+}
+
+
+function timeout(delay) {
+    console.log(`Delaying next request for ${delay} seconds.`);
+    return new Promise(resolve => setTimeout(resolve, delay*1000));
 }

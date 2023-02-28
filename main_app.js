@@ -14,5 +14,5 @@ app.use('/api/*',(req,res,next)=>{next({status: 404, "message": 'Page Not Found'
 app.use('/*',(req,res,next)=>{next({status: 404, "message": 'Page Not Found'})});
 app.use(error_handler);
 
-PORT_NUM = process.env.PORT || 2001;
+PORT_NUM = 2001;
 app.listen(PORT_NUM,console.log(`Server has started at port ${PORT_NUM}`));
