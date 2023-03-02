@@ -14,11 +14,17 @@ const send_request = async ()=>{
     
         const start_link = document.getElementById('StartLink').value;
         const end_link = document.getElementById('EndLink').value;
-        let max_retryRequest = document.getElementById('Retry_number').value;
         
+        let max_retryRequest = document.getElementById('Retry_number').value;
         if(!max_retryRequest) max_retryRequest=1;
         else max_retryRequest = parseInt(max_retryRequest);
         console.log( typeof max_retryRequest , max_retryRequest );
+        
+
+        let Timeout_seconds = document.getElementById('Timeout').value;
+        if(!Timeout_seconds) Timeout_seconds=-1;
+        else Timeout_seconds = parseInt(Timeout_seconds);
+        console.log( typeof Timeout_seconds , Timeout_seconds );
 
 
         if(check_link(start_link) && check_link(end_link) && start_link!=end_link)
@@ -37,12 +43,13 @@ const send_request = async ()=>{
                         data: 
                         {
                             "start_link": start_link,
-                            "end_link": end_link
+                            "end_link": end_link,
+                            "Timeout" : Timeout_seconds
                         }
                     });
 
                 console.log("RESPONSE: ",response);
-            
+                if (response.data.message==="Timeout") print_error(`Timeout`);
                 if(response.status>=200 && response.status<300) break;
                 else
                 {
@@ -62,6 +69,7 @@ const send_request = async ()=>{
                 console.log(response.data.Time);
                 print_output(response.data.message , response.data.Time);
             }
+            
             btn[0].disabled =false;
         }
         else print_error("Start Link and End Link should be different  !!!")
