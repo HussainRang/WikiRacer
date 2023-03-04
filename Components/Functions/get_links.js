@@ -19,22 +19,6 @@ const scrape_links = (html,link) =>{
 	//console.log(anchor_set);
 	return anchor_set;
 
-	/*let table_anchors = selector("table a[href*='/wiki/']:not([href*=':']):not([href*='#']):not([class*='external text'])");
-	for(let i=0;i<table_anchors.length;i=i+1)
-	{
-		data = selector(table_anchors[i]);
-		anchor_set.add("https://en.wikipedia.org"+data.attr('href'));
-	}
-
-	
-	let thumbnail_anchors = selector("div.thumbcaption a[href*='/wiki/']:not([href*=':'])");
-	for(let i=0;i<thumbnail_anchors.length;i=i+1)
-	{
-		data = selector(thumbnail_anchors[i]);
-		anchor_set.add("https://en.wikipedia.org"+data.attr('href'));
-	}
-
-	return anchor_set;*/
 }
 
 

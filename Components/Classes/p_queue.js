@@ -8,7 +8,7 @@ class priority_queue{
     enqueue(elem)
     {
         this.p_q.push(elem);
-        let index = this.size()-1;
+        let index = this.p_q.length-1;
 
         while(    index!=0    &&    this.p_q[ Math.ceil(index/2) - 1].heuristic < this.p_q[index].heuristic  )
         {
@@ -18,6 +18,9 @@ class priority_queue{
 
             index = Math.ceil(index/2) - 1;
         }
+
+        index = this.prevent_overflow(index);
+        console.log("SIZE: ",this.p_q.length);
     }
 
     dequeue()
@@ -56,6 +59,16 @@ class priority_queue{
     size()
     {
         return this.p_q.length;
+    }
+
+    prevent_overflow(index)
+    {
+        if(index>1000)
+        {   
+            this.p_q.splice( this.p_q.length-1 , 1 );
+            index = index - 1;
+        }
+        return index;
     }
 
 };

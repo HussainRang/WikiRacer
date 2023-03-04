@@ -31,19 +31,6 @@ const bfs = async (start_link,end_link)=>{
             if(!previous_elements.has(links_list[i]))
             {
 
-                /*if(links_list[i]===end_link) 
-                {
-                    let obj = {... current_obj};
-                    let links_arr = [... obj["links"] ]; 
-                    obj["links"] = links_arr;
-                    obj["links"].push(links_list[i]);
-                    console.log(obj);
-
-                    return obj["links"];
-                }
-                else
-                {*/
-
                     let heur = await heuristic(links_list[i],end_links_set,end_link);
                     let obj = {... current_obj};
                     let links_arr = [... obj["links"] ]; 
@@ -69,7 +56,7 @@ const bfs = async (start_link,end_link)=>{
                     `);
                     
                     pq.enqueue(obj);
-                //} 
+              
             }
         }
     }
