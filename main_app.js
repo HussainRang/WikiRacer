@@ -16,3 +16,5 @@ app.use(error_handler);
 
 PORT_NUM = 2001;
 app.listen(PORT_NUM,console.log(`Server has started at port ${PORT_NUM}`));
+
+module.exports = app;

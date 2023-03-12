@@ -1,4 +1,4 @@
-const serve_page = (req,res)=>{
+const serve_page = (req,res,next)=>{
 
     try 
     {
