@@ -7,7 +7,7 @@ const error_handler = (err,req,res,next)=>
     {
         err.status=200;
     }
-    console.log(err);
+    //console.log(err);
     res.status(err.status).json({"message":err.message , "status":err.status});
 }
 

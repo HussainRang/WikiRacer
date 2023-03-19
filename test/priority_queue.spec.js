@@ -1,7 +1,7 @@
 const priority_queue = require('../Components/Classes/priority_queue');
 const chai = require('chai');
 const { assert } = require('chai');
-const expect = require('chai').expect;
+var expect = chai.expect;
 const should = require('chai').should();
 
 

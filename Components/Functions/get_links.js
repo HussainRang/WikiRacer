@@ -1,6 +1,5 @@
 const cherio = require('cheerio');
-const request = require('request-promise')
-
+const request = require('request-promise');
 
 const scrape_links = (html,link) =>{
 
@@ -23,21 +22,26 @@ const scrape_links = (html,link) =>{
 
 
 
-const req_page = async (link)=>{
+const req_page = async ( link )=>{
 
-	const html = await request({uri:link});
-	return html;
-
-}
-
-
-const get_links = async (link)=>{
-    
-	const html = await req_page(link);
-	const links_set = await scrape_links(html,link);
-	return links_set;
+	try {
+		const html = await request({uri:link});
+		return html;
 		
+	} catch (error) {
+		console.log(error.message);
+		return undefined;
+	}
 }
 
 
-module.exports = {get_links};
+const get_links = async ( link , req_page , scrape_links )=>{
+		const html = await req_page(link);
+		if(!html) return undefined;
+		
+		const links_set = await scrape_links(html,link);
+		return links_set;
+}
+
+
+module.exports = { get_links , req_page , scrape_links };

@@ -1,11 +1,15 @@
-const {bfs} = require('./a_star.js')
+const {bfs,return_links_list} = require('./a_star.js');
+const { get_links , req_page , scrape_links } = require('./get_links');
+const {heuristic} = require('./heuristic.js');
 
-const send_response_data = async (start_link,end_link)=>{
+const send_response_data = async (start_link,end_link,bfs)=>{
          
     let start_time = new Date();
     
-    const answer = await bfs( start_link , end_link );
+    const answer = await bfs( start_link , end_link , get_links , req_page , scrape_links , heuristic , return_links_list );
+    if(!answer) return undefined;
     
+
     let end_time = new Date();
     
     let time_diff = end_time - start_time;
@@ -65,7 +69,14 @@ const get_ladder = async (req,res,next)=>{
 
         if(Timeout==-1)
         {
-            let response_data = await send_response_data(start_link,end_link);
+            let response_data = await send_response_data(start_link,end_link,bfs);
+            if(!response_data)
+            {
+                let err = new Error('A link does not exists');
+                err.status = 400;
+                throw err;
+            }
+            
             console.log(response_data);
             res.status(200).json({ "message":response_data['message'] , "Time":response_data['Time'] , "error":response_data['error'] });
         }
@@ -78,7 +89,14 @@ const get_ladder = async (req,res,next)=>{
             });
 
 
-            let response_data = await Promise.race([timeoutPromise, send_response_data(start_link,end_link)]);
+            let response_data = await Promise.race([timeoutPromise, send_response_data(start_link,end_link,bfs)]);
+            if(!response_data)
+            {
+                let err = new Error('A link does not exists');
+                err.status = 400;
+                throw err;
+            }
+            
             console.log(response_data);
             res.status(200).json({ "message":response_data['message'] , "Time":response_data['Time'] , "error":response_data['error'] });
         }

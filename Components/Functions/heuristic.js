@@ -1,8 +1,8 @@
-const {get_links} = require('./get_links.js')
-
-const heuristic = async (current_link,end_links_set,end_link)=>{
+const heuristic = async (current_link,end_links_set,end_link , get_links_fn , req_page_fn , scrape_links_fn )=>{
   
-    let current_link_set = await get_links(current_link);
+    let current_link_set = await get_links_fn(current_link,req_page_fn,scrape_links_fn);
+    if(!current_link_set) return undefined;
+
     let current_link_list = [... current_link_set];
     
     let heuristic=0;
